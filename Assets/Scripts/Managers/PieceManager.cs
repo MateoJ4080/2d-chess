@@ -62,7 +62,7 @@ public class PieceManager : MonoBehaviour
     }
 
     [PunRPC]
-    public void SyncMove(int fromX, int fromY, int toX, int toY, int pieceID, bool isMoveFromWhite)
+    public void SyncMove(int fromX, int fromY, int toX, int toY, int pieceID)
     {
         Vector2Int from = new(fromX, fromY);
         Vector2Int to = new(toX, toY);

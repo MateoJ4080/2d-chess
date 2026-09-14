@@ -113,27 +113,27 @@ public class TimerManager : MonoBehaviourPunCallbacks
         _selfTime = 5;
         _lastTurnStartTime = PhotonNetwork.Time;
 
-        photonView.RPC("SyncTimer", RpcTarget.Others, (double)175);
+        photonView.RPC(nameof(SyncTimer), RpcTarget.Others, (double)175);
     }
 
     [ContextMenu("Set debug timers")]
     public void SetDebugTimers()
     {
-        ApplyDebugTimers();
-        photonView.RPC(nameof(SyncDebugTimers), RpcTarget.Others);
+        ApplyDebugTimers(_demoSelfTime, _demoOpponentTime);
+        photonView.RPC(nameof(SyncDebugTimers), RpcTarget.Others, _demoSelfTime, _demoOpponentTime);
     }
 
     [PunRPC]
-    void SyncDebugTimers()
+    void SyncDebugTimers(double time, double opponentTime)
     {
-        ApplyDebugTimers();
+        ApplyDebugTimers(time, opponentTime);
     }
 
-    private void ApplyDebugTimers()
+    private void ApplyDebugTimers(double time, double opponentTime)
     {
         _lastTurnStartTime = PhotonNetwork.Time;
-        _selfTime = _demoSelfTime;
-        _opponentTime = _demoOpponentTime;
+        _selfTime = time;
+        _opponentTime = opponentTime;
 
         UIManager.Instance.UpdateTimers(_selfTime, _opponentTime);
     }
