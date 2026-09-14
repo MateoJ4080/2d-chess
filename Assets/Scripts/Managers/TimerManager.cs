@@ -120,7 +120,7 @@ public class TimerManager : MonoBehaviourPunCallbacks
     public void SetDebugTimers()
     {
         ApplyDebugTimers(_demoSelfTime, _demoOpponentTime);
-        photonView.RPC(nameof(SyncDebugTimers), RpcTarget.Others, _demoSelfTime, _demoOpponentTime);
+        photonView.RPC(nameof(SyncDebugTimers), RpcTarget.Others, _demoOpponentTime, _demoSelfTime);
     }
 
     [PunRPC]

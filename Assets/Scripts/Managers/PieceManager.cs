@@ -41,7 +41,7 @@ public class PieceManager : MonoBehaviour
         if (isCastling) HandleCastling(from, to, isWhite);
 
         MovePiece(from, to, piece);
-        _photonView.RPC("SyncMove", RpcTarget.OthersBuffered, from.x, from.y, to.x, to.y, pieceID, isWhite);
+        _photonView.RPC(nameof(SyncMove), RpcTarget.OthersBuffered, from.x, from.y, to.x, to.y, pieceID);
 
         GameManager.Instance.OnPieceMovedBySelf(piece, from, to, target);
     }
@@ -96,7 +96,7 @@ public class PieceManager : MonoBehaviour
         int rookID = rook.GetComponent<PhotonView>().ViewID;
 
         MovePiece(rookFrom, rookTo, rook);
-        _photonView.RPC("SyncMove", RpcTarget.OthersBuffered, rookFrom.x, rookFrom.y, rookTo.x, rookTo.y, rookID, isWhite);
+        _photonView.RPC(nameof(SyncMove), RpcTarget.OthersBuffered, rookFrom.x, rookFrom.y, rookTo.x, rookTo.y, rookID);
     }
 
     private bool CanMovePiece(GameObject piece, Vector2Int to)
